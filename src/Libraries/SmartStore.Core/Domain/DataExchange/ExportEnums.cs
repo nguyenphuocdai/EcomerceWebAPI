@@ -13,7 +13,9 @@ namespace SmartStore.Core.Domain.DataExchange
         Customer,
         Order,
         NewsLetterSubscription,
-        ShoppingCartItem
+        ShoppingCartItem,
+        Vitae,
+        Client
     }
 
     /// <summary>
