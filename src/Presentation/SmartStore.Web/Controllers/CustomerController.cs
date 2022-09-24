@@ -13,6 +13,7 @@ using SmartStore.Core.Domain.Messages;
 using SmartStore.Core.Domain.Orders;
 using SmartStore.Core.Domain.Tax;
 using SmartStore.Core.Logging;
+using SmartStore.Core.Security;
 using SmartStore.Services.Authentication;
 using SmartStore.Services.Authentication.External;
 using SmartStore.Services.Catalog;
@@ -432,6 +433,11 @@ namespace SmartStore.Web.Controllers
             model.CustomerLoginType = _customerSettings.CustomerLoginType;
             model.CheckoutAsGuest = checkoutAsGuest ?? false;
             model.DisplayCaptcha = _captchaSettings.CanDisplayCaptcha && _captchaSettings.ShowOnLoginPage;
+
+            if (Services.Permissions.Authorize(Permissions.System.AccessBackend))
+            {
+                return Redirect("/admin");
+            }
 
             return View(model);
         }
