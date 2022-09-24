@@ -1,0 +1,126 @@
+﻿@using SmartStore.Admin.Models.CurriculumVitae
+@using SmartStore.Core.Domain.Catalog;
+@model SmartStore.Admin.Models.CurriculumVitae.PersonalModel
+
+<div>
+    <table class="adminContent mb-2">
+        <tr>
+            <td colspan="2">
+                <div class="admin-config-group">
+                    <div class="head">@T("Admin.Catalog.Personal.Client.AddNew")</div>
+                </div>
+            </td>
+        </tr>
+
+        @if (Model.AddPersonalClientModel.Id != 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SmartLabelFor(model => model.AddPersonalClientModel.Id)
+                </td>
+                <td class="adminData">
+                    @Html.TextBoxFor(model => model.AddPersonalClientModel.Id, new { @readonly = "readonly", @class = "form-control-plaintext" })
+                    @Html.ValidationMessageFor(model => model.AddPersonalClientModel.Id)
+                </td>
+            </tr>
+            if (Model.AddPersonalClientModel.CreatedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.AddPersonalClientModel.CreatedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.AddPersonalClientModel.CreatedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+            if (Model.AddPersonalClientModel.ModifiedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.AddPersonalClientModel.ModifiedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.AddPersonalClientModel.ModifiedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.AddPersonalClientModel.ClientName)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.AddPersonalClientModel.ClientName)
+                @Html.ValidationMessageFor(model => model.AddPersonalClientModel.ClientName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.AddPersonalClientModel.ClientDescription)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.AddPersonalClientModel.ClientDescription)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.AddPersonalClientModel.ClientImageId)
+            </td>
+            <td class="adminData wide" colspan="2">
+                @Html.EditorFor(model => model.AddPersonalClientModel.ClientImageId, new
+                {
+                    entityId = Model.Id,
+                    entityType = "Client",
+                    transientUpload = false,
+                    album = "catalog",
+                    multifile = false,
+                    uploadedFiles = Model.ProductMediaFiles as IEnumerable<IMediaFile>,
+                    typeFilter = "image,video"
+                })
+                @Html.ValidationMessageFor(model => model.AddPersonalClientModel.ClientImageId)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                &nbsp;
+            </td>
+            <td class="adminData">
+                <button type="button" name="addProductSpec" id="addProductSpec" class="btn btn-primary">
+                    <i class="fa fa-plus"></i>
+                    <span>@T("Admin.Catalog.Products.SpecificationAttributes.AddButton")</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    @(Html.Telerik().Grid<PersonalClientModel>()
+        .Name("client-grid")
+        .Columns(columns =>
+        {
+            columns.Bound(x => x.Id)
+                .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                .Title("<input id='mastercheckbox' type='checkbox'/>")
+                .HtmlAttributes(new { style = "text-align:center" })
+                .HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Bound(x => x.Id);
+            columns.Bound(x => x.ClientName);
+            columns.Bound(x => x.ClientDescription);
+            columns.Bound(x => x.CreatedDate);
+            columns.Bound(x => x.ModifiedDate);
+            columns.Bound(x => x.Id)
+                .Centered()
+                .ClientTemplate("<a href=\"Edit/<#= Id #>\" class=\"t-button\">" + T("Admin.Common.Edit").Text + "</a>")
+                .Title(string.Empty)
+                .HtmlAttributes(new { align = "right", @class = "omega" });
+        })
+        .Pageable(settings => settings.PageSize(Model.GridPageSize).Position(GridPagerPosition.Both))
+        .DataBinding(dataBinding => dataBinding.Ajax().Select("PersonalClientList", "Personal"))
+        .PreserveGridState()
+        .EnableCustomBinding(true))
+</div>

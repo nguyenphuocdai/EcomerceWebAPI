@@ -1,0 +1,44 @@
+﻿@model SmartStore.Admin.Models.CurriculumVitae.PersonalModel
+@using Telerik.Web.Mvc.UI;
+@using SmartStore.Core.Domain.Catalog;
+@{
+	ViewBag.Title = T("Admin.Catalog.Products.EditPersonalDetails").Text;
+}
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "personal-form" })) {
+    <div class="section-header">
+        <div class="title">
+            @T("Admin.Catalog.Products.EditPersonalDetails") - <span title="@Model.FullName">@Model.FullName.Truncate(45, "...")</span> 
+			<a href='@Url.Action("List")'>(@T("Admin.Vitae.Personal.BackToList"))</a>
+        </div>
+        <div class="options">
+			@{ Html.RenderWidget("admin_button_toolbar_before"); }
+
+			@*<button type="submit" name="preview" value="preview" onclick="javascript:openWindow('@Model.ProductUrl', 1000, 600, true); return false;" class="btn btn-secondary">
+                <i class="far fa-eye"></i>
+                <span>@T("Admin.Common.Preview")</span>
+            </button>*@
+			<button type="submit" value="save" class="btn btn-warning entity-commit-trigger" data-commit-type="product" data-commit-action="update" data-commit-id="@Model.Id">
+				<i class="fa fa-check"></i>
+				<span>@T("Admin.Common.Save")</span>
+			</button>
+			<button type="submit" value="save-continue" class="btn btn-secondary entity-commit-trigger" data-commit-type="product" data-commit-action="update" data-commit-id="@Model.Id">
+				@T("Admin.Common.SaveContinue")
+			</button>
+			@*<a href="#copyproduct-window" data-toggle="modal" class="btn btn-secondary">
+				<i class="far fa-copy"></i>
+				<span>@T("Admin.Catalog.Products.Copy")</span>
+			</a>*@
+			<button type="submit" id="personal-delete" class="btn btn-danger">
+				<i class="far fa-trash-alt"></i>
+				<span>@T("Admin.Common.Delete")</span>
+			</button>
+
+			@{ Html.RenderWidget("admin_button_toolbar_after"); }
+        </div>
+    </div>
+
+    Html.RenderPartial("_CreateOrUpdate", Model);
+}
+
+@Html.DeleteConfirmation("personal-delete")

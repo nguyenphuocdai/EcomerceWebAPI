@@ -1,0 +1,48 @@
+﻿@using SmartStore.Core.Domain.Catalog;
+@using SmartStore.Web.Framework.UI;
+
+@model SmartStore.Admin.Models.CurriculumVitae.PersonalModel
+
+@{
+    Html.AddCssFileParts(true, "~/Content/vendors/x-editable/bootstrap-editable.css");
+    Html.AppendScriptParts(true, "~/Content/vendors/x-editable/bootstrap-editable.js");
+}
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.CustomerId)
+@Html.HiddenFor(model => model.Id)
+
+<script>
+    function productEditTab_onAjaxSuccess(tab, pane) {
+        applyCommonPlugins(pane);
+    }
+</script>
+
+@Html.SmartStore().TabStrip().Name("personal-edit").OnAjaxSuccess("productEditTab_onAjaxSuccess").HtmlAttributes(new { data_product_id = Model.Id }).Style(TabsStyle.Material).Position(TabsPosition.Left).Items(x =>
+{
+    x.Add().Text(T("Admin.Vitae.Personal.Info"))
+        .Icon("fa fa-pencil-alt fa-lg fa-fw")
+        .LinkHtmlAttributes(new { data_tab_name = "Info" })
+        .Content(Html.Partial("_CreateOrUpdate.Info", Model).ToHtmlString())
+        .Selected(true);
+
+    x.Add().Text(T("Admin.Vitae.Personal.Pictures"))
+        .Icon("far fa-image fa-lg fa-fw")
+        .LinkHtmlAttributes(new { data_tab_name = "Pictures" })
+        .Content(Html.Partial("_CreateOrUpdate.Pictures", Model).ToHtmlString());
+
+    x.Add().Text(T("Common.Downloads").Text)
+        .Icon("fa fa-download fa-lg fa-fw")
+        .LinkHtmlAttributes(new { data_tab_name = "Downloads" })
+        .Content(Html.Partial("_CreateOrUpdate.Downloads", Model).ToHtmlString());
+
+    //x.Add().Text(T("Common.Clients").Text)
+    //    .Icon("far fa-building")
+    //    .LinkHtmlAttributes(new { data_tab_name = "Client" })
+    //    .Content(Html.Partial("_CreateOrUpdate.Client", Model).ToHtmlString());
+
+    // generate an event
+    EngineContext.Current.Resolve<IEventPublisher>().Publish(new TabStripCreated(x, "personal-edit", this.Html, this.Model));
+})
+

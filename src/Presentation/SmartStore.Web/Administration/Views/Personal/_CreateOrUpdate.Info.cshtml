@@ -1,0 +1,310 @@
+﻿@model SmartStore.Admin.Models.CurriculumVitae.PersonalModel
+
+<div>
+    <table class="adminContent mb-2">
+        @if (Model.Id != 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SmartLabelFor(model => model.Id)
+                </td>
+                <td class="adminData">
+                    @Html.TextBoxFor(model => model.Id, new { @readonly = "readonly", @class = "form-control-plaintext" })
+                    @Html.ValidationMessageFor(model => model.Id)
+                </td>
+            </tr>
+            if (Model.CreatedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.CreatedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+            if (Model.ModifiedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.ModifiedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.ModifiedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FullName)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FullName)
+                @Html.ValidationMessageFor(model => model.FullName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.AliasName)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.AliasName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.Title)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.Title)
+                @Html.ValidationMessageFor(model => model.Title)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.BirthDate)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.BirthDate, new { pickTime = false })
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.Residence)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.Residence)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.Address)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.Address)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.Email)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.PhoneNumber)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.PhoneNumber)
+            </td>
+        </tr>
+        <tr class="adminSeparator">
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.Introduce)
+            </td>
+            <td class="adminData">
+                @Html.TextAreaFor(model => model.Introduce)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IntroduceTitle00)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.IntroduceTitle00)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IntroduceContent00)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.IntroduceContent00)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IntroduceTitle01)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.IntroduceTitle01)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IntroduceContent01)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.IntroduceContent01)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IntroduceTitle02)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.IntroduceTitle02)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IntroduceContent02)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.IntroduceContent02)
+            </td>
+        </tr>
+        <tr class="adminSeparator">
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactTitle00)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactTitle00)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactContent00)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactContent00)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactTitle01)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactTitle01)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactContent01)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactContent01)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactTitle02)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactTitle02)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactContent02)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactContent02)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactTitle03)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactTitle03)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FunFactContent03)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FunFactContent03)
+            </td>
+        </tr>
+        <tr class="adminSeparator">
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IsFreelanceAvailable)
+            </td>
+            <td class="adminData">
+                @Html.CheckBoxFor(model => model.IsFreelanceAvailable)
+                @Html.ValidationMessageFor(model => model.IsFreelanceAvailable)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.IsOpeningJob)
+            </td>
+            <td class="adminData">
+                @Html.CheckBoxFor(model => model.IsOpeningJob)
+                @Html.ValidationMessageFor(model => model.IsOpeningJob)
+            </td>
+        </tr>
+        <tr class="adminSeparator">
+            <td colspan="2">
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.FacebookLink)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.FacebookLink)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.YoutubeLink)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.YoutubeLink)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.TelegramLink)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.TelegramLink)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.InstagramLink)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.InstagramLink)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.TwitterLink)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.TwitterLink)
+            </td>
+        </tr>
+    </table>
+</div>
