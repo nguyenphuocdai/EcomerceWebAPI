@@ -1,0 +1,87 @@
+﻿@model SmartStore.Admin.Models.CurriculumVitae.PersonalClientListModel
+@using Telerik.Web.Mvc.UI;
+@using System.Globalization;
+@using SmartStore.Admin.Models.CurriculumVitae
+@{
+    ViewBag.Title = T("Admin.Vitae").Text;
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="section-header">
+        <div class="title">
+            <i class="icm icm-bag"></i>
+            @T("Admin.Vitae")
+        </div>
+        <div class="options">
+            @{ Html.RenderWidget("admin_button_toolbar_before"); }
+
+            <button type="button" class="btn btn-outline-secondary btn-toggle-filter" data-toggle="button" aria-pressed="false">
+                <i class="fa fa-filter"></i>
+                <span>@T("Common.Filter")</span>
+                <i class="fa fa-angle-double-down"></i>
+            </button>
+
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fa fa-plus"></i>
+                <span>@T("Admin.Common.AddNew")</span>
+            </a>
+
+            @{ Html.RenderWidget("admin_button_toolbar_after"); }
+        </div>
+    </div>
+
+    <div class="row mt-3 grid-filter" style="display: none">
+        <div class="col-sm-6 col-lg-4 col-xl-3 form-group">
+            @Html.SmartLabelFor(model => model.SearchName)
+            @Html.TextBoxFor(model => Model.SearchName, new { @class = "form-control sf" })
+        </div>
+
+        <div class="col-sm-6 col-lg-4 col-xl-3 form-group">
+            @Html.SmartLabelFor(model => model.SearchDescription)
+            @Html.TextBoxFor(model => Model.SearchDescription, new { @class = "form-control sf" })
+        </div>
+        <div class="col-sm-6 col-lg-4 col-xl-3 form-group">
+            <label>@T("Admin.Common.ApplyFilter")</label>
+            <button type="submit" id="search-customers" name="search-customers" class="btn btn-warning btn-block">
+                <span>@T("Admin.Common.ApplyFilter")</span>
+            </button>
+        </div>
+    </div>
+
+    @(Html.Telerik().Grid<PersonalClientModel>()
+        .Name("vitae-grid")
+        .Columns(columns =>
+        {
+            columns.Bound(x => x.Id)
+                .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                .Title("<input id='mastercheckbox' type='checkbox'/>")
+                .HtmlAttributes(new { style = "text-align:center" })
+                .HeaderHtmlAttributes(new { style = "text-align:center" });
+            columns.Bound(x => x.Id);
+            columns.Bound(x => x.CustomerId);
+            columns.Bound(x => x.ClientName);
+            columns.Bound(x => x.ClientDescription);
+            columns.Bound(x => x.CreatedDate);
+            columns.Bound(x => x.ModifiedDate);
+            columns.Bound(x => x.Id)
+                .Centered()
+                .ClientTemplate("<a href=\"Edit/<#= Id #>\" class=\"t-button\">" + T("Admin.Common.Edit").Text + "</a>")
+                .Title(String.Empty)
+                .HtmlAttributes(new { align = "right", @class = "omega" });
+        })
+        .Pageable(settings => settings.PageSize(Model.GridPageSize).Position(GridPagerPosition.Both))
+        .DataBinding(dataBinding => dataBinding.Ajax().Select("PersonalClientList", "PersonalClient"))
+        .PreserveGridState()
+        .EnableCustomBinding(true))
+
+    <script>
+        $(function () {
+            // Filter toggler.
+            $('.btn-toggle-filter').on('click',
+                function (e) {
+                    $('.grid-filter').slideToggle({ duration: 200, easing: 'ease-in-out' });
+                });
+        });
+    </script>
+}
