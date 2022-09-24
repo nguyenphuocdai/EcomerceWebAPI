@@ -87,7 +87,7 @@ namespace SmartStore.Admin.Controllers
         [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         [Permission(Permissions.Media.Download.Create)]
-        public ActionResult CreateDownloadFromMediaFile(int mediaFileId, int entityId = 0, string entityName = "")
+        public ActionResult CreateDownloadFromMediaFile(int mediaFileId, int entityId = 0, string entityName = "Vitae")
         {
             var download = new Download
             {
