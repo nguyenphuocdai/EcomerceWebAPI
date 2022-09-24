@@ -49,6 +49,7 @@ using SmartStore.Services.Catalog.Rules;
 using SmartStore.Services.Cms;
 using SmartStore.Services.Common;
 using SmartStore.Services.Configuration;
+using SmartStore.Services.CurriculumVitae;
 using SmartStore.Services.Customers;
 using SmartStore.Services.Customers.Importer;
 using SmartStore.Services.DataExchange;
@@ -201,6 +202,9 @@ namespace SmartStore.Web.Framework
 
             builder.RegisterType<CustomerContentService>().As<ICustomerContentService>().InstancePerRequest();
             builder.RegisterType<CustomerService>().As<ICustomerService>().InstancePerRequest();
+            builder.RegisterType<PersonalService>().As<IPersonalService>().InstancePerRequest();
+            builder.RegisterType<PersonalClientService>().As<IPersonalClientService>().InstancePerRequest();
+            builder.RegisterType<PersonalSkillService>().As<IPersonalSkillService>().InstancePerRequest();
             builder.RegisterType<CustomerRegistrationService>().As<ICustomerRegistrationService>().InstancePerRequest();
             builder.RegisterType<CustomerReportService>().As<ICustomerReportService>().InstancePerRequest();
 
