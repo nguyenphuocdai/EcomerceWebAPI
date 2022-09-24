@@ -175,6 +175,50 @@
             }
         }
 
+        public static class CurriculumVitae
+        {
+            public const string Self = "curriculumvitae";
+
+            public static class Personal
+            {
+                public const string Self = "curriculumvitae.personal";
+                public const string Read = "curriculumvitae.personal.read";
+                public const string Update = "curriculumvitae.personal.update";
+                public const string EditPictures = "curriculumvitae.personal.editpictures";
+                public const string Create = "curriculumvitae.personal.create";
+                public const string Delete = "curriculumvitae.personal.delete";
+            }
+
+            public static class PersonalClient
+            {
+                public const string Self = "curriculumvitae.personalclient";
+                public const string Read = "curriculumvitae.personalclient.read";
+                public const string Update = "curriculumvitae.personalclient.update";
+                public const string EditPictures = "curriculumvitae.personalclient.editpictures";
+                public const string Create = "curriculumvitae.personalclient.create";
+                public const string Delete = "curriculumvitae.personalclient.delete";
+            }
+
+            public static class PersonalSkill
+            {
+                public const string Self = "curriculumvitae.personalskill";
+                public const string Read = "curriculumvitae.personalskill.read";
+                public const string Update = "curriculumvitae.personalskill.update";
+                public const string EditPictures = "curriculumvitae.personalskill.editpictures";
+                public const string Create = "curriculumvitae.personalskill.create";
+                public const string Delete = "curriculumvitae.personalskill.delete";
+            }
+
+            public static class PersonalResume
+            {
+                public const string Self = "curriculumvitae.personalresume";
+                public const string Read = "curriculumvitae.personalresume.read";
+                public const string Update = "curriculumvitae.personalresume.update";
+                public const string Create = "curriculumvitae.personalresume.create";
+                public const string Delete = "curriculumvitae.personalresume.delete";
+            }
+        }
+
         public static class Cms
         {
             public const string Self = "cms";

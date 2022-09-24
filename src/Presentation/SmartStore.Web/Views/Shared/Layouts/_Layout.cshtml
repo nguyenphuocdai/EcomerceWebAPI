@@ -34,99 +34,99 @@
 
     <div class="page-main canvas-slidable">
         @if (IsSectionDefined("header"))
-		{
+        {
             @RenderSection("header")
-		}
-		else
-		{
+        }
+        else
+        {
             <header id="header">
                 <div class="menubar-section d-none d-lg-block @(GetThemeVariable<bool>("inverse-menubar") ? "menubar-inverse" : "menubar-light")">
                     <div class="container menubar-container">
-                        @{ 
-							Html.RenderAction("TopBar", "Common", new { area = "" });
-						}
+                        @{
+                            Html.RenderAction("TopBar", "Common", new { area = "" });
+                        }
                     </div>
                 </div>
-                <div class="shopbar-section @(GetThemeVariable<bool>("inverse-shopbar") ? "shopbar-inverse" : "shopbar-light")"> 
+                @*<div class="shopbar-section @(GetThemeVariable<bool>("inverse-shopbar") ? "shopbar-inverse" : "shopbar-light")">
                     <div class="container shopbar-container">
-                        @{ 
-							Html.RenderAction("ShopBar", "Common", new { area = "" });
-						}
+                        @{
+                            Html.RenderAction("ShopBar", "Common", new { area = "" });
+                        }
                     </div>
                 </div>
                 <div class="megamenu-section d-none d-lg-block">
                     <nav class='navbar @(GetThemeVariable<bool>("inverse-navbar") ? "navbar-inverse" : "navbar-light")'>
                         <div class="container megamenu-container">
                             @{ Html.SmartStore().Menu().Name("Main").Render(); }
-						</div>
-					</nav>
-				</div>
-			</header>
+                        </div>
+                    </nav>
+                </div>*@
+            </header>
         }
 
         <div id="content-wrapper">
-			@{ 
-				Html.RenderAction("JavaScriptDisabledWarning", "Common", new { area = "" });
-				Html.RenderWidget("content_before");
-			}
+            @{
+                Html.RenderAction("JavaScriptDisabledWarning", "Common", new { area = "" });
+                Html.RenderWidget("content_before");
+            }
             <section id="content" class="container">
-				@{ 
-					@RenderSection("teaser", required: false);
-					Html.RenderAction("Breadcrumb", "Menu", new { area = "" });
-					Html.RenderZone("teaser");
-					Html.RenderWidget("teaser");
-				}
+                @{
+                    @RenderSection("teaser", required: false);
+                    Html.RenderAction("Breadcrumb", "Menu", new { area = "" });
+                    Html.RenderZone("teaser");
+                    Html.RenderWidget("teaser");
+                }
                 <div id="content-body" class="row">
 
-					@if (hasLeftCol)
-					{
-						<aside id="content-left" class="col-lg-3 mb-4 mb-lg-0@(hideLeftCol ? " d-none d-lg-block" : "")">
-							@{
-								Html.RenderWidget("aside_left_before");
-								@RenderSection("left");
-								Html.RenderWidget("aside_left_after");
-							}
-						</aside>
-					}
+                    @if (hasLeftCol)
+                    {
+                        <aside id="content-left" class="col-lg-3 mb-4 mb-lg-0@(hideLeftCol ? " d-none d-lg-block" : "")">
+                            @{
+                                Html.RenderWidget("aside_left_before");
+                                @RenderSection("left");
+                                Html.RenderWidget("aside_left_after");
+                            }
+                        </aside>
+                    }
 
-					<div id="content-center" class="col-lg-@mainColspan">
-						@{ 
-							Html.RenderWidget("main_column_before");
-							@RenderBody();
-							Html.RenderWidget("main_column_after");
-						}
-					</div>
+                    <div id="content-center" class="col-lg-@mainColspan">
+                        @{
+                            Html.RenderWidget("main_column_before");
+                            @RenderBody();
+                            Html.RenderWidget("main_column_after");
+                        }
+                    </div>
 
-					@if (hasRightCol)
-					{
-						<aside id="content-right" class="col-lg-3 mt-4 mt-lg-0@(hideRightCol ? " d-none d-lg-block" : "")">
-							@{
-								Html.RenderWidget("aside_right_before");
-								@RenderSection("right");
-								Html.RenderWidget("aside_right_after");
-							}
-						</aside>
-					}
+                    @if (hasRightCol)
+                    {
+                        <aside id="content-right" class="col-lg-3 mt-4 mt-lg-0@(hideRightCol ? " d-none d-lg-block" : "")">
+                            @{
+                                Html.RenderWidget("aside_right_before");
+                                @RenderSection("right");
+                                Html.RenderWidget("aside_right_after");
+                            }
+                        </aside>
+                    }
 
                     @{ Html.RenderWidget("content_after"); }
                 </div>
             </section>
         </div>
 
-		@{ Html.RenderWidget("footer_before"); }
+        @{ Html.RenderWidget("footer_before"); }
 
-        @if (IsSectionDefined("footer"))
-		{
+        @*@if (IsSectionDefined("footer"))
+        {
             @RenderSection("footer")
-		}
-		else
-		{
+        }
+        else
+        {
             <footer id="footer" class="@(GetThemeVariable<bool>("inverse-footer") ? "footer-inverse" : "footer-light")">
                 @{ Html.RenderAction("Footer", "Common", new { area = "" }); }
-			</footer>
-		}
+            </footer>
+        }*@
 
-		@{ Html.RenderZone("page-end"); }
+        @{ Html.RenderZone("page-end"); }
     </div>
 
 	<a href="#" id="scroll-top" class="scrollto d-flex align-items-center justify-content-center shadow-sm">

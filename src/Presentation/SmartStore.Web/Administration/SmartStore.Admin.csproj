@@ -120,6 +120,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -183,6 +184,10 @@
     </Compile>
     <Compile Include="Controllers\ActivityLogController.cs" />
     <Compile Include="Controllers\AffiliateController.cs" />
+    <Compile Include="Controllers\PersonalResumeController.cs" />
+    <Compile Include="Controllers\PersonalSkillController.cs" />
+    <Compile Include="Controllers\PersonalClientController.cs" />
+    <Compile Include="Controllers\PersonalController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CampaignController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
@@ -268,6 +273,10 @@
     <Compile Include="Models\Common\MaintenanceModel.cs" />
     <Compile Include="Models\Common\SystemWarningModel.cs" />
     <Compile Include="Models\Common\SystemInfoModel.cs" />
+    <Compile Include="Models\CurriculumVitae\PersonalSkillListModel.cs" />
+    <Compile Include="Models\CurriculumVitae\PersonalClientListModel.cs" />
+    <Compile Include="Models\CurriculumVitae\PersonalListModel.cs" />
+    <Compile Include="Models\CurriculumVitae\PersonalModel.cs" />
     <Compile Include="Models\Customers\RegisteredCustomersDashboardReportModel.cs" />
     <Compile Include="Models\Customers\CustomerRoleMappingModel.cs" />
     <Compile Include="Models\Customers\TopCustomersDashboardReportModel.cs" />
@@ -666,6 +675,22 @@
     <Content Include="Views\Product\_CreateOrUpdate.Orders.cshtml" />
     <Content Include="Views\Order\Partials\OrderGrid.cshtml" />
     <Content Include="Views\Rule\ValueTemplates\CartItemQuantity.cshtml" />
+    <Content Include="Views\Personal\List.cshtml" />
+    <Content Include="Views\Personal\Create.cshtml" />
+    <Content Include="Views\Personal\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\Personal\_CreateOrUpdate.Info.cshtml" />
+    <Content Include="Views\Personal\_CreateOrUpdate.Pictures.cshtml" />
+    <Content Include="Views\Personal\Edit.cshtml" />
+    <Content Include="Views\Personal\_CreateOrUpdate.Downloads.cshtml" />
+    <Content Include="Views\Personal\_CreateOrUpdate.Client.cshtml" />
+    <Content Include="Views\PersonalClient\List.cshtml" />
+    <Content Include="Views\PersonalSkill\List.cshtml" />
+    <Content Include="Views\PersonalSkill\Create.cshtml" />
+    <Content Include="Views\PersonalSkill\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\PersonalSkill\Edit.cshtml" />
+    <Content Include="Views\PersonalResume\List.cshtml" />
+    <Content Include="Views\PersonalClient\Create.cshtml" />
+    <Content Include="Views\PersonalClient\_CreateOrUpdate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Category\Create.cshtml" />

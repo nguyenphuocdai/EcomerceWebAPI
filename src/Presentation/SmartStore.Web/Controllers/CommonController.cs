@@ -636,19 +636,17 @@ namespace SmartStore.Web.Controllers
         {
             var customer = Services.WorkContext.CurrentCustomer;
 
-            var model = new MenuBarModel
-            {
-                RecentlyAddedProductsEnabled = _catalogSettings.RecentlyAddedProductsEnabled,
-                NewsEnabled = _newsSettings.Enabled,
-                BlogEnabled = _blogSettings.Enabled,
-                ForumEnabled = _forumSettings.ForumsEnabled,
-                CustomerEmailUsername = customer.IsRegistered() ? (_customerSettings.CustomerLoginType != CustomerLoginType.Email ? customer.Username : customer.Email) : "",
-                IsCustomerImpersonated = Services.WorkContext.OriginalCustomerIfImpersonated != null,
-                IsAuthenticated = customer.IsRegistered(),
-                DisplayAdminLink = Services.Permissions.Authorize(Permissions.System.AccessBackend),
-                HasContactUsPage = Url.Topic("ContactUs").ToString().HasValue(),
-                DisplayLoginLink = _customerSettings.UserRegistrationType != UserRegistrationType.Disabled
-            };
+            var model = new MenuBarModel();
+            model.RecentlyAddedProductsEnabled = _catalogSettings.RecentlyAddedProductsEnabled;
+            model.NewsEnabled = _newsSettings.Enabled;
+            model.BlogEnabled = _blogSettings.Enabled;
+            model.ForumEnabled = _forumSettings.ForumsEnabled;
+            model.CustomerEmailUsername = customer.IsRegistered() ? (_customerSettings.CustomerLoginType != CustomerLoginType.Email ? customer.Username : customer.Email) : "";
+            model.IsCustomerImpersonated = Services.WorkContext.OriginalCustomerIfImpersonated != null;
+            model.IsAuthenticated = customer.IsRegistered();
+            model.DisplayAdminLink = Services.Permissions.Authorize(Permissions.System.AccessBackend);
+            model.HasContactUsPage = Url.Topic("ContactUs").ToString().HasValue();
+            model.DisplayLoginLink = _customerSettings.UserRegistrationType != UserRegistrationType.Disabled;
 
             return PartialView(model);
         }

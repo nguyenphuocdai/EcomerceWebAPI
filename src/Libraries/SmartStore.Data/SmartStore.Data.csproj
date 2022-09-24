@@ -150,6 +150,9 @@
     <Compile Include="Extensions\ExceptionExtensions.cs" />
     <Compile Include="Mapping\Catalog\ProductAttributeOptionMap.cs" />
     <Compile Include="Mapping\Catalog\ProductAttributeOptionsSetMap.cs" />
+    <Compile Include="Mapping\CurriculumVitae\PersonalSkillMap.cs" />
+    <Compile Include="Mapping\CurriculumVitae\PersonalClientMap.cs" />
+    <Compile Include="Mapping\CurriculumVitae\PersonalMap.cs" />
     <Compile Include="Mapping\Customers\WalletHistoryMap.cs" />
     <Compile Include="Mapping\DataExchange\ImportProfileMap.cs" />
     <Compile Include="Mapping\DataExchange\SyncMappingMap.cs" />

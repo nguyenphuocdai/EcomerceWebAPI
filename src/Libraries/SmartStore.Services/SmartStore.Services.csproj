@@ -256,6 +256,14 @@
     <Compile Include="Common\IUserAgent.cs" />
     <Compile Include="Common\TempFileCleanupTask.cs" />
     <Compile Include="Common\UAParserUserAgent.cs" />
+    <Compile Include="CurriculumVitae\IPersonalSkillService.cs" />
+    <Compile Include="CurriculumVitae\IPersonalClientService.cs" />
+    <Compile Include="CurriculumVitae\PersonalSkillService.cs" />
+    <Compile Include="CurriculumVitae\PersonalSkillSearchQuery.cs" />
+    <Compile Include="CurriculumVitae\PersonalClientSearchQuery.cs" />
+    <Compile Include="CurriculumVitae\PersonalSearchQuery.cs" />
+    <Compile Include="CurriculumVitae\PersonalClientService.cs" />
+    <Compile Include="CurriculumVitae\PersonalService.cs" />
     <Compile Include="Customers\CustomerMessageFactoryExtensions.cs" />
     <Compile Include="Customers\CustomerSearchQuery.cs" />
     <Compile Include="Customers\Events\CustomerAnonymizedEvent.cs" />
@@ -267,6 +275,7 @@
     <Compile Include="Customers\ICookieManager.cs" />
     <Compile Include="Customers\IGdprTool.cs" />
     <Compile Include="Customers\Importer\CustomerImporter.cs" />
+    <Compile Include="CurriculumVitae\IPersonalService.cs" />
     <Compile Include="Customers\Rules\ITargetGroupService.cs" />
     <Compile Include="Customers\Rules\TargetGroupFilterDescriptor.cs" />
     <Compile Include="Customers\Rules\TargetGroupService.cs" />

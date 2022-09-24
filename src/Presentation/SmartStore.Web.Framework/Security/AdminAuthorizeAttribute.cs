@@ -31,7 +31,7 @@ namespace SmartStore.Web.Framework.Security
                 return true;
             }
 
-            return false;
+            return false; 
         }
 
         public void OnAuthorization(AuthorizationContext filterContext)

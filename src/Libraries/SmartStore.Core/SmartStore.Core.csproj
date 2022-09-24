@@ -218,6 +218,7 @@
     <Compile Include="Domain\Catalog\ProductAttributeOption.cs" />
     <Compile Include="Domain\Catalog\ProductAttributeOptionsSet.cs" />
     <Compile Include="Domain\Catalog\ProductCondition.cs" />
+    <Compile Include="Domain\Catalog\PersonalSkillType.cs" />
     <Compile Include="Domain\Catalog\ProductVisibility.cs" />
     <Compile Include="Domain\Catalog\QuantiyControlType.cs" />
     <Compile Include="Domain\Catalog\IPagingOptions.cs" />
@@ -226,6 +227,9 @@
     <Compile Include="Domain\Cms\MenuItemRecord.cs" />
     <Compile Include="Domain\Cms\WidgetSettings.cs" />
     <Compile Include="Domain\Common\PerformanceSettings.cs" />
+    <Compile Include="Domain\CurriculumVitae\PersonalSkill.cs" />
+    <Compile Include="Domain\CurriculumVitae\PersonalClient.cs" />
+    <Compile Include="Domain\CurriculumVitae\Personal.cs" />
     <Compile Include="Domain\Customers\SameSiteType.cs" />
     <Compile Include="Domain\Customers\CustomerLoginType.cs" />
     <Compile Include="Domain\Customers\CustomerNumberVisibility.cs" />
