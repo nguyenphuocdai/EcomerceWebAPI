@@ -1,6 +1,7 @@
 ﻿using SmartStore.Admin.Models.Blogs;
 using SmartStore.Admin.Models.Catalog;
 using SmartStore.Admin.Models.Common;
+using SmartStore.Admin.Models.CurriculumVitae;
 using SmartStore.Admin.Models.Customers;
 using SmartStore.Admin.Models.Directory;
 using SmartStore.Admin.Models.Discounts;
@@ -22,6 +23,7 @@ using SmartStore.ComponentModel;
 using SmartStore.Core.Domain.Blogs;
 using SmartStore.Core.Domain.Catalog;
 using SmartStore.Core.Domain.Common;
+using SmartStore.Core.Domain.CurriculumVitae;
 using SmartStore.Core.Domain.Customers;
 using SmartStore.Core.Domain.Directory;
 using SmartStore.Core.Domain.Discounts;
@@ -92,6 +94,16 @@ namespace SmartStore.Admin
         public static ProductModel ToModel(this Product entity)
         {
             return MapperFactory.Map<Product, ProductModel>(entity);
+        }
+
+        public static PersonalModel ToModel(this Personal entity)
+        {
+            return MapperFactory.Map<Personal, PersonalModel>(entity);
+        }
+
+        public static PersonalSkillModel ToModel(this PersonalSkill entity)
+        {
+            return MapperFactory.Map<PersonalSkill, PersonalSkillModel>(entity);
         }
 
         public static Product ToEntity(this ProductModel model)
