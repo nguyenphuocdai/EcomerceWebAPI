@@ -1,0 +1,106 @@
+﻿@using SmartStore.Admin.Models.CurriculumVitae
+@using SmartStore.Core.Domain.Catalog;
+@using SmartStore.Web.Framework.UI;
+
+@model SmartStore.Admin.Models.CurriculumVitae.PersonalSkillModel
+
+@{
+    Html.AddCssFileParts(true, "~/Content/vendors/x-editable/bootstrap-editable.css");
+    Html.AppendScriptParts(true, "~/Content/vendors/x-editable/bootstrap-editable.js");
+}
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.CustomerId)
+@Html.HiddenFor(model => model.Id)
+
+<div>
+    <table class="adminContent mb-2">
+        @if (Model.Id != 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SmartLabelFor(model => model.Id)
+                </td>
+                <td class="adminData">
+                    @Html.TextBoxFor(model => model.Id, new { @readonly = "readonly", @class = "form-control-plaintext" })
+                    @Html.ValidationMessageFor(model => model.Id)
+                </td>
+            </tr>
+            if (Model.CreatedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.CreatedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+            if (Model.ModifiedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.ModifiedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.ModifiedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.SkillType)
+            </td>
+            <td class="adminData">
+                @Html.DropDownListFor(model => model.SkillType, ((PersonalSkillType)Model.SkillType).ToSelectList())
+                @Html.ValidationMessageFor(model => model.SkillType)
+            </td>
+        </tr>
+
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.SkillName)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.SkillName)
+                @Html.ValidationMessageFor(model => model.SkillName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.SkillShortName)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.SkillShortName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.SkillPercentage)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SkillPercentage)
+                @Html.ValidationMessageFor(model => model.SkillPercentage)
+
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.SkillStar)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.SkillStar)
+                @Html.ValidationMessageFor(model => model.SkillStar)
+            </td>
+        </tr>
+    </table>
+</div>
