@@ -106,6 +106,14 @@ namespace SmartStore.Admin
             return MapperFactory.Map<PersonalSkill, PersonalSkillModel>(entity);
         }
 
+        public static PersonalClientModel ToModel(this PersonalClient entity)
+        {
+            return MapperFactory.Map<PersonalClient, PersonalClientModel>(entity);
+        }
+        public static PersonalResumeModel ToModel(this PersonalResume entity)
+        {
+            return MapperFactory.Map<PersonalResume, PersonalResumeModel>(entity);
+        }
         public static Product ToEntity(this ProductModel model)
         {
             return MapperFactory.Map<ProductModel, Product>(model);

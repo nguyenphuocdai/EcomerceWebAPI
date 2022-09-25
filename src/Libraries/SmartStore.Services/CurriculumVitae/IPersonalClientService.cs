@@ -6,6 +6,11 @@ namespace SmartStore.Services.CurriculumVitae
     public partial interface IPersonalClientService
     {
         IPagedList<PersonalClient> SearchPersonalClients(PersonalClientSearchQuery q);
-        void InsertPersonalClient(PersonalClient personal);
+        void InsertPersonalClient(PersonalClient client);
+        PersonalClient GetPersonalClientById(int id);
+        void UpdateClient(PersonalClient client);
+        void DeleteClient(PersonalClient client);
+        void DeleteClient(int id);
+
     }
 }
