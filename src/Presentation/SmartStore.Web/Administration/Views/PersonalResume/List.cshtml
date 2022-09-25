@@ -1,4 +1,4 @@
-﻿@model SmartStore.Admin.Models.CurriculumVitae.PersonalClientListModel
+﻿@model SmartStore.Admin.Models.CurriculumVitae.PersonalResumeListModel
 @using Telerik.Web.Mvc.UI;
 @using System.Globalization;
 @using SmartStore.Admin.Models.CurriculumVitae
@@ -11,7 +11,7 @@
     <div class="section-header">
         <div class="title">
             <i class="icm icm-bag"></i>
-            @T("Admin.Vitae")
+            @T("Admin.Resume")
         </div>
         <div class="options">
             @{ Html.RenderWidget("admin_button_toolbar_before"); }
@@ -26,31 +26,34 @@
                 <i class="fa fa-plus"></i>
                 <span>@T("Admin.Common.AddNew")</span>
             </a>
-
+            <button type="submit" id="delete-selected" class="btn btn-danger" onclick='return confirm(@T("Admin.Common.AreYouSure").JsText);'>
+                <i class="far fa-trash-alt"></i>
+                <span>@T("Admin.Common.Delete.Selected")</span>
+            </button>
             @{ Html.RenderWidget("admin_button_toolbar_after"); }
         </div>
     </div>
 
     <div class="row mt-3 grid-filter" style="display: none">
         <div class="col-sm-6 col-lg-4 col-xl-3 form-group">
-            @Html.SmartLabelFor(model => model.SearchName)
-            @Html.TextBoxFor(model => Model.SearchName, new { @class = "form-control sf" })
+            @Html.SmartLabelFor(model => model.CustomerId)
+            @Html.TextBoxFor(model => Model.CustomerId, new { @class = "form-control sf" })
         </div>
 
         <div class="col-sm-6 col-lg-4 col-xl-3 form-group">
-            @Html.SmartLabelFor(model => model.SearchDescription)
-            @Html.TextBoxFor(model => Model.SearchDescription, new { @class = "form-control sf" })
+            @Html.SmartLabelFor(model => model.SearchCompany)
+            @Html.TextBoxFor(model => Model.SearchCompany, new { @class = "form-control sf" })
         </div>
         <div class="col-sm-6 col-lg-4 col-xl-3 form-group">
             <label>@T("Admin.Common.ApplyFilter")</label>
-            <button type="submit" id="search-customers" name="search-customers" class="btn btn-warning btn-block">
+            <button type="submit" id="search-resume" name="search-resume" class="btn btn-warning btn-block">
                 <span>@T("Admin.Common.ApplyFilter")</span>
             </button>
         </div>
     </div>
 
-    @(Html.Telerik().Grid<PersonalClientModel>()
-        .Name("vitae-grid")
+    @(Html.Telerik().Grid<PersonalResumeModel>()
+        .Name("resume-grid")
         .Columns(columns =>
         {
             columns.Bound(x => x.Id)
@@ -60,8 +63,13 @@
                 .HeaderHtmlAttributes(new { style = "text-align:center" });
             columns.Bound(x => x.Id);
             columns.Bound(x => x.CustomerId);
-            columns.Bound(x => x.ClientName);
-            columns.Bound(x => x.ClientDescription);
+            columns.Bound(x => x.ResumeType);
+            columns.Bound(x => x.ResumeShort);
+            columns.Bound(x => x.Company);
+            columns.Bound(x => x.Address);
+            columns.Bound(x => x.From);
+            columns.Bound(x => x.To);
+            columns.Bound(x => x.Description);
             columns.Bound(x => x.CreatedDate);
             columns.Bound(x => x.ModifiedDate);
             columns.Bound(x => x.Id)
@@ -71,17 +79,131 @@
                 .HtmlAttributes(new { align = "right", @class = "omega" });
         })
         .Pageable(settings => settings.PageSize(Model.GridPageSize).Position(GridPagerPosition.Both))
-        .DataBinding(dataBinding => dataBinding.Ajax().Select("PersonalClientList", "PersonalClient"))
+        .DataBinding(dataBinding => dataBinding.Ajax().Select("PersonalResumeList", "PersonalResume"))
         .PreserveGridState()
         .EnableCustomBinding(true))
 
     <script>
-        $(function () {
-            // Filter toggler.
-            $('.btn-toggle-filter').on('click',
-                function (e) {
-                    $('.grid-filter').slideToggle({ duration: 200, easing: 'ease-in-out' });
+		@*Used by widget SmartStore.CommonExportProviders::ExportButtonsGeneral.cshtml*@
+		var selectedIds = [];
+
+		$(function () {
+            var token = $('input[name="__RequestVerificationToken"]').val();
+
+			// Filter toggler.
+			$('.btn-toggle-filter').on('click', function (e) {
+				$('.grid-filter').slideToggle({ duration: 200, easing: 'ease-in-out' });
+			});
+
+            $('#btnSearch').click(function () {
+                //search
+                var grid = $('#resume-grid').data('tGrid');
+                grid.currentPage = 1; //new search. Set page size to 1
+                grid.ajaxRequest();
+                //clear selected checkboxes
+                $('.checkboxGroups').attr('checked', false).change();
+                selectedIds = [];
+                return false;
+            });
+
+            $('#delete-selected').click(function (e) {
+                processMany(e, "@Url.Action("DeleteSelected", "PersonalResume")")
+            });
+
+            function processMany(e, action) {
+                e.preventDefault();
+
+                $.ajax({
+                    cache:false,
+                    type: "POST",
+                    url: action,
+                    data: {
+                        selectedIds: selectedIds,
+                        "__RequestVerificationToken": token
+                    },
+                    complete: function (data) {
+                        //reload grid
+                        var grid = $('#resume-grid').data('tGrid');
+                        grid.ajaxRequest();
+                        //clear selected checkboxes
+                        $('.checkboxGroups').attr('checked', false).change();
+                        selectedIds = [];
+                    },
+                    error:function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError);
+                    },
+                    traditional: true
                 });
-        });
+                return false;
+            }
+
+			$(".form-control.sf").on("keydown", function (e) {
+				if (e.keyCode == 13) {
+					$("#search-resume").click();
+					return false;
+				}
+			});
+
+			$('#mastercheckbox').click(function () {
+				$('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+			});
+
+			// Wire up checkboxes.
+            $(document).on('change', '#resume-grid input[type=checkbox][id!=mastercheckbox]', function (e) {
+				var $check = $(this);
+				if ($check.is(":checked") == true) {
+					var checked = jQuery.inArray($check.val(), selectedIds);
+					if (checked == -1) {
+						//add id to selectedIds.
+						selectedIds.push($check.val());
+					}
+				}
+				else {
+					var checked = jQuery.inArray($check.val(), selectedIds);
+					if (checked > -1) {
+						//remove id from selectedIds.
+						selectedIds = $.grep(selectedIds, function (item, index) {
+							return item != $check.val();
+						});
+					}
+				}
+				updateMasterCheckbox();
+			});
+		});
+
+		function onDataBound() {
+			$('#resume-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
+				var currentId = $(this).val();
+				var checked = jQuery.inArray(currentId, selectedIds);
+				// Set checked based on if current checkbox's value is in selectedIds.
+				$(this).attr('checked', checked > -1);
+			});
+
+			updateMasterCheckbox();
+        }
+
+		function updateMasterCheckbox() {
+            var numChkBoxes = $('#resume-grid input[type=checkbox][id!=mastercheckbox]').length;
+            var numChkBoxesChecked = $('#resume-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
+			$('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+		}
+
+		function onDataBinding(e) {
+			e.data = {
+                CustomerId: $('#@Html.FieldIdFor(model => model.CustomerId)').val(),
+                SearchCompany: $('#@Html.FieldIdFor(model => model.SearchCompany)').val()
+			};
+
+            var customerGrid = $('#resume-grid');
+			if (customerGrid.data('init-loaded')) {
+                e.data.CustomerId = $('#@(Html.FieldIdFor(x => x.CustomerId))').val();
+                e.data.SearchCompany = $('#@(Html.FieldIdFor(x => x.SearchCompany))').val();
+            }
+			else {
+				customerGrid.data('init-loaded', true);
+                e.data.CustomerId = '@(string.Join(",", Model.CustomerId))';
+                e.data.SearchCompany = '@(string.Join(",", Model.SearchCompany))';
+            }
+		}
     </script>
 }
