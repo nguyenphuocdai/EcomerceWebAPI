@@ -217,6 +217,15 @@
                 public const string Create = "curriculumvitae.personalresume.create";
                 public const string Delete = "curriculumvitae.personalresume.delete";
             }
+
+            public static class PersonalPortfolio
+            {
+                public const string Self = "curriculumvitae.personalportfolio";
+                public const string Read = "curriculumvitae.personalportfolio.read";
+                public const string Update = "curriculumvitae.personalportfolio.update";
+                public const string Create = "curriculumvitae.personalportfolio.create";
+                public const string Delete = "curriculumvitae.personalportfolio.delete";
+            }
         }
 
         public static class Cms

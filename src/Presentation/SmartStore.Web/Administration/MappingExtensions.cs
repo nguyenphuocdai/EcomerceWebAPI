@@ -114,6 +114,12 @@ namespace SmartStore.Admin
         {
             return MapperFactory.Map<PersonalResume, PersonalResumeModel>(entity);
         }
+
+        public static PersonalPortfolioModel ToModel(this PersonalPortfolio entity)
+        {
+            return MapperFactory.Map<PersonalPortfolio, PersonalPortfolioModel>(entity);
+        }
+
         public static Product ToEntity(this ProductModel model)
         {
             return MapperFactory.Map<ProductModel, Product>(model);

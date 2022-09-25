@@ -233,6 +233,25 @@ namespace SmartStore.Admin.Models.CurriculumVitae
         public DateTime? ModifiedDate { get; set; }
     }
 
+    public class PersonalPortfolioModel : EntityModelBase
+    {
+        public int CustomerId { get; set; }
+        public string PortfolioName { get; set; }
+        public string PortfolioUrl { get; set; }
+        public string ShortMessage { get; set; }
+        public DateTime? From { get; set; }
+        public DateTime? To { get; set; }
+        public DateTime? Published { get; set; }
+        public int Status { get; set; }
+        public string Description { get; set; }
+        public string Tag { get; set; }
+        public string ShareLinkFacebook { get; set; }
+        public string ShareLinkTwitter { get; set; }
+        public string ShareLinkInstagram { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+    }
+
     [Validator(typeof(SkillValidator))]
     public class PersonalSkillModel : EntityModelBase
     {
