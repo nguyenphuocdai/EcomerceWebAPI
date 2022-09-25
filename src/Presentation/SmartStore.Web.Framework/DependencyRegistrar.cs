@@ -205,6 +205,7 @@ namespace SmartStore.Web.Framework
             builder.RegisterType<PersonalService>().As<IPersonalService>().InstancePerRequest();
             builder.RegisterType<PersonalClientService>().As<IPersonalClientService>().InstancePerRequest();
             builder.RegisterType<PersonalSkillService>().As<IPersonalSkillService>().InstancePerRequest();
+            builder.RegisterType<PersonalResumeService>().As<IPersonalResumeService>().InstancePerRequest();
             builder.RegisterType<CustomerRegistrationService>().As<ICustomerRegistrationService>().InstancePerRequest();
             builder.RegisterType<CustomerReportService>().As<ICustomerReportService>().InstancePerRequest();
 
