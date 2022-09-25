@@ -218,6 +218,21 @@ namespace SmartStore.Admin.Models.CurriculumVitae
         public bool NoThumb { get; set; }
     }
 
+    public class PersonalResumeModel : EntityModelBase
+    {
+        public int CustomerId { get; set; }
+        public int ResumeType { get; set; }
+        public string ResumeShort { get; set; }
+        public string Company { get; set; }
+        public string Address { get; set; }
+        public string Title { get; set; }
+        public DateTime? From { get; set; }
+        public DateTime? To { get; set; }
+        public string Description { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+    }
+
     [Validator(typeof(SkillValidator))]
     public class PersonalSkillModel : EntityModelBase
     {
