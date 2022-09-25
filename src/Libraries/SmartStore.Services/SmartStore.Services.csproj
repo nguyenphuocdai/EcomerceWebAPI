@@ -256,9 +256,12 @@
     <Compile Include="Common\IUserAgent.cs" />
     <Compile Include="Common\TempFileCleanupTask.cs" />
     <Compile Include="Common\UAParserUserAgent.cs" />
+    <Compile Include="CurriculumVitae\IPersonalPortfolioService.cs" />
     <Compile Include="CurriculumVitae\IPersonalResumeService.cs" />
     <Compile Include="CurriculumVitae\IPersonalSkillService.cs" />
     <Compile Include="CurriculumVitae\IPersonalClientService.cs" />
+    <Compile Include="CurriculumVitae\PersonalPortfolioSearchQuery.cs" />
+    <Compile Include="CurriculumVitae\PersonalPortfolioService.cs" />
     <Compile Include="CurriculumVitae\PersonalResumeService.cs" />
     <Compile Include="CurriculumVitae\PersonalResumeSearchQuery.cs" />
     <Compile Include="CurriculumVitae\PersonalSkillService.cs" />

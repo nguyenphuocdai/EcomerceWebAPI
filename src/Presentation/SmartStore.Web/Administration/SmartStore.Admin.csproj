@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="Controllers\ActivityLogController.cs" />
     <Compile Include="Controllers\AffiliateController.cs" />
+    <Compile Include="Controllers\PersonalPortfolioController.cs" />
     <Compile Include="Controllers\PersonalResumeController.cs" />
     <Compile Include="Controllers\PersonalSkillController.cs" />
     <Compile Include="Controllers\PersonalClientController.cs" />
@@ -273,6 +274,7 @@
     <Compile Include="Models\Common\MaintenanceModel.cs" />
     <Compile Include="Models\Common\SystemWarningModel.cs" />
     <Compile Include="Models\Common\SystemInfoModel.cs" />
+    <Compile Include="Models\CurriculumVitae\PersonalPortfolioListModel.cs" />
     <Compile Include="Models\CurriculumVitae\PersonalResumeListModel.cs" />
     <Compile Include="Models\CurriculumVitae\PersonalSkillListModel.cs" />
     <Compile Include="Models\CurriculumVitae\PersonalClientListModel.cs" />
@@ -696,6 +698,10 @@
     <Content Include="Views\PersonalResume\Create.cshtml" />
     <Content Include="Views\PersonalResume\_CreateOrUpdate.cshtml" />
     <Content Include="Views\PersonalResume\Edit.cshtml" />
+    <Content Include="Views\PersonalPortfolio\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\PersonalPortfolio\Create.cshtml" />
+    <Content Include="Views\PersonalPortfolio\Edit.cshtml" />
+    <Content Include="Views\PersonalPortfolio\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Category\Create.cshtml" />
