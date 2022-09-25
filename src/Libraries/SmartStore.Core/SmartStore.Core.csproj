@@ -214,6 +214,7 @@
     <Compile Include="Data\ITransaction.cs" />
     <Compile Include="Domain\Catalog\AttributeChoiceBehaviour.cs" />
     <Compile Include="Domain\Catalog\CategoryNode.cs" />
+    <Compile Include="Domain\Catalog\PersonalResumeType.cs" />
     <Compile Include="Domain\Catalog\PriceDisplayStyle.cs" />
     <Compile Include="Domain\Catalog\ProductAttributeOption.cs" />
     <Compile Include="Domain\Catalog\ProductAttributeOptionsSet.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Domain\Cms\MenuItemRecord.cs" />
     <Compile Include="Domain\Cms\WidgetSettings.cs" />
     <Compile Include="Domain\Common\PerformanceSettings.cs" />
+    <Compile Include="Domain\CurriculumVitae\PersonalResume.cs" />
     <Compile Include="Domain\CurriculumVitae\PersonalSkill.cs" />
     <Compile Include="Domain\CurriculumVitae\PersonalClient.cs" />
     <Compile Include="Domain\CurriculumVitae\Personal.cs" />

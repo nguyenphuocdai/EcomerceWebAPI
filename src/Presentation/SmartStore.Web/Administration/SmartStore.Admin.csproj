@@ -273,6 +273,7 @@
     <Compile Include="Models\Common\MaintenanceModel.cs" />
     <Compile Include="Models\Common\SystemWarningModel.cs" />
     <Compile Include="Models\Common\SystemInfoModel.cs" />
+    <Compile Include="Models\CurriculumVitae\PersonalResumeListModel.cs" />
     <Compile Include="Models\CurriculumVitae\PersonalSkillListModel.cs" />
     <Compile Include="Models\CurriculumVitae\PersonalClientListModel.cs" />
     <Compile Include="Models\CurriculumVitae\PersonalListModel.cs" />
@@ -691,6 +692,10 @@
     <Content Include="Views\PersonalResume\List.cshtml" />
     <Content Include="Views\PersonalClient\Create.cshtml" />
     <Content Include="Views\PersonalClient\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\PersonalClient\Edit.cshtml" />
+    <Content Include="Views\PersonalResume\Create.cshtml" />
+    <Content Include="Views\PersonalResume\_CreateOrUpdate.cshtml" />
+    <Content Include="Views\PersonalResume\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Category\Create.cshtml" />
