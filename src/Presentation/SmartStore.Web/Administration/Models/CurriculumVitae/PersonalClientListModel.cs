@@ -5,6 +5,9 @@ namespace SmartStore.Admin.Models.CurriculumVitae
 {
     public class PersonalClientListModel
     {
+        [AllowHtml]
+        public int CustomerId { get; set; }
+
         public int GridPageSize { get; set; }
 
         [SmartResourceDisplayName("Admin.Vitae.PersonalClient.List.SearchName")]

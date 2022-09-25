@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using SmartStore.Admin.Models.CurriculumVitae;
@@ -24,7 +25,6 @@ namespace SmartStore.Admin.Controllers
     {
         private readonly AdminAreaSettings _adminAreaSettings;
         private readonly ICustomerActivityService _customerActivityService;
-        private readonly IEventPublisher _eventPublisher;
         private readonly IMediaService _mediaService;
         private readonly MediaSettings _mediaSettings;
         private readonly IPersonalClientService _personalClientService;
@@ -34,7 +34,6 @@ namespace SmartStore.Admin.Controllers
             IPersonalClientService personalClientService,
             AdminAreaSettings adminAreaSettings,
             ICommonServices services,
-            IEventPublisher eventPublisher,
             ICustomerActivityService customerActivityService,
             IMediaService mediaService,
             MediaSettings mediaSettings)
@@ -42,7 +41,6 @@ namespace SmartStore.Admin.Controllers
             _personalClientService = personalClientService;
             _adminAreaSettings = adminAreaSettings;
             _services = services;
-            _eventPublisher = eventPublisher;
             _customerActivityService = customerActivityService;
             _mediaService = mediaService;
             _mediaSettings = mediaSettings;
@@ -162,10 +160,97 @@ namespace SmartStore.Admin.Controllers
                 model.CreatedDate = DateTime.Now;
                 model.ModifiedDate = DateTime.Now;
             }
-            //else
-            //{
-            //    model.CustomerId = personal.CustomerId;
-            //}
+            else
+            {
+                model.CustomerId = client.CustomerId;
+                model.ClientName = client.ClientName;
+                model.ClientDescription = client.ClientDescription;
+                model.ClientImageId = client.ClientImageId;
+                model.CreatedDate = client.CreatedDate;
+                model.ModifiedDate = client.ModifiedDate;
+            }
+        }
+
+        [Permission(Permissions.CurriculumVitae.PersonalClient.Read)]
+        public ActionResult Edit(int id)
+        {
+            var client = _personalClientService.GetPersonalClientById(id);
+            if (client == null)
+            {
+                NotifyWarning(T("Client.NotFound", id));
+                return RedirectToAction("List");
+            }
+
+            var model = client.ToModel();
+            PrepareClientModel(model, client);
+
+            return View(model);
+        }
+
+        [HttpPost, ParameterBasedOnFormName("save-continue", "continueEditing")]
+        [ValidateInput(false)]
+        [ValidateAntiForgeryToken]
+        [Permission(Permissions.CurriculumVitae.PersonalClient.Update)]
+        public ActionResult Edit(PersonalClientModel model, bool continueEditing)
+        {
+            var client = _personalClientService.GetPersonalClientById(model.Id);
+            if (client == null)
+            {
+                NotifyWarning(T("Skill.NotFound", model.Id));
+                return RedirectToAction("List");
+            }
+
+            if (ModelState.IsValid)
+            {
+                client.ClientName = model.ClientName;
+                client.ClientDescription = model.ClientDescription;
+                client.ClientImageId = model.ClientImageId;
+                client.ModifiedDate = DateTime.Now;
+
+                _personalClientService.UpdateClient(client);
+
+                _customerActivityService.InsertActivity("EditClient", T("ActivityLog.EditClient"), client.ClientName);
+
+                NotifySuccess(T("Admin.Catalog.Client.Updated"));
+                return continueEditing ? RedirectToAction("Edit", new { id = client.Id }) : RedirectToAction("List");
+            }
+
+            // If we got this far, something failed, redisplay form.
+            PrepareClientModel(model, client);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Permission(Permissions.CurriculumVitae.PersonalClient.Delete)]
+        public ActionResult DeleteSelected(ICollection<int> selectedIds)
+        {
+            if (selectedIds != null)
+            {
+                foreach (var id in selectedIds)
+                {
+                    _personalClientService.DeleteClient(id);
+                }
+            }
+
+            NotifySuccess(T("Admin.Common.TaskSuccessfullyProcessed"));
+
+            return Json(new { success = true });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Permission(Permissions.CurriculumVitae.PersonalClient.Delete)]
+        public ActionResult Delete(int id)
+        {
+            var client = _personalClientService.GetPersonalClientById(id);
+            _personalClientService.DeleteClient(client);
+
+            _customerActivityService.InsertActivity("DeleteClient", T("ActivityLog.DeleteClient"), client.ClientName);
+
+            NotifySuccess(T("Admin.Catalog.Client.Deleted"));
+            return RedirectToAction("List");
         }
     }
 }

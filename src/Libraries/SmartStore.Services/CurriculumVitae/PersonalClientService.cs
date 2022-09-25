@@ -44,5 +44,32 @@ namespace SmartStore.Services.CurriculumVitae
 
             _personalClientRepository.Insert(personalClient);
         }
+
+        public virtual PersonalClient GetPersonalClientById(int id)
+        {
+            var client = (_personalClientRepository.Table).SingleOrDefault(x => x.Id == id);
+            return client;
+        }
+
+        public virtual void UpdateClient(PersonalClient personalClient)
+        {
+            Guard.NotNull(personalClient, nameof(personalClient));
+
+            _personalClientRepository.Update(personalClient);
+        }
+
+        public virtual void DeleteClient(PersonalClient personalClient)
+        {
+            Guard.NotNull(personalClient, nameof(personalClient));
+
+            _personalClientRepository.Delete(personalClient);
+        }
+
+        public virtual void DeleteClient(int id)
+        {
+            var skill = GetPersonalClientById(id);
+            if (skill != null)
+                DeleteClient(skill);
+        }
     }
 }
