@@ -11,6 +11,7 @@ using SmartStore.Core.Domain.Media;
 using SmartStore.Core.Security;
 using SmartStore.Services.Catalog;
 using SmartStore.Services.Common;
+using SmartStore.Services.CurriculumVitae;
 using SmartStore.Services.Localization;
 using SmartStore.Services.Media;
 using SmartStore.Services.Orders;
@@ -25,6 +26,7 @@ using SmartStore.Web.Framework.Seo;
 using SmartStore.Web.Framework.UI;
 using SmartStore.Web.Infrastructure.Cache;
 using SmartStore.Web.Models.Catalog;
+using SmartStore.Web.Models.Media;
 
 namespace SmartStore.Web.Controllers
 {
@@ -45,8 +47,10 @@ namespace SmartStore.Web.Controllers
         private readonly MediaSettings _mediaSettings;
         private readonly CatalogSettings _catalogSettings;
         private readonly ICompareProductsService _compareProductsService;
+        private readonly IPersonalService _personalService;
         private readonly CatalogHelper _helper;
         private readonly IBreadcrumb _breadcrumb;
+        private readonly IMediaService _mediaService;
 
         public CatalogController(
             ICategoryService categoryService,
@@ -64,7 +68,9 @@ namespace SmartStore.Web.Controllers
             ICatalogSearchService catalogSearchService,
             MediaSettings mediaSettings,
             CatalogSettings catalogSettings,
+            IPersonalService personalService,
             CatalogHelper helper,
+            IMediaService mediaService,
             IBreadcrumb breadcrumb)
         {
             _categoryService = categoryService;
@@ -84,6 +90,8 @@ namespace SmartStore.Web.Controllers
             _catalogSettings = catalogSettings;
             _helper = helper;
             _breadcrumb = breadcrumb;
+            _personalService = personalService;
+            _mediaService = mediaService;
         }
 
         #region Categories
@@ -232,6 +240,46 @@ namespace SmartStore.Web.Controllers
                 .ToList();
 
             var model = _helper.MapCategorySummaryModel(categories, _mediaSettings.CategoryThumbPictureSize);
+
+            if (model.Count == 0)
+            {
+                return new EmptyResult();
+            }
+
+            return PartialView(model);
+        }
+
+        [ChildActionOnly]
+        public ActionResult HomepagePersonal()
+        {
+            var personals = _personalService.GetAllPersonalDisplayedOnHomePage();
+            var pictureSize = _mediaSettings.CategoryThumbPictureSize;
+
+            List<HomePagePersonalModel> model = new List<HomePagePersonalModel>();
+
+            foreach (var person in personals)
+            {
+                HomePagePersonalModel item = new HomePagePersonalModel();
+                item.PersonalModel = person;
+
+                int.TryParse(person.Avatar, out int imageID);
+
+                var file = _mediaService.GetFileById(imageID);
+                item.PictureModel = new PictureModel
+                {
+                    PictureId = imageID,
+                    Size = pictureSize,
+                    ImageUrl = _mediaService.GetUrl(file, pictureSize, null, !_catalogSettings.HideCategoryDefaultPictures),
+                    FullSizeImageUrl = _mediaService.GetUrl(file, 0, null, false),
+                    FullSizeImageWidth = file?.Dimensions.Width,
+                    FullSizeImageHeight = file?.Dimensions.Height,
+                    Title = file?.File?.GetLocalized(x => x.Title)?.Value.NullEmpty() ?? string.Format(T("Media.Category.ImageLinkTitleFormat"), person.FullName),
+                    AlternateText = file?.File?.GetLocalized(x => x.Alt)?.Value.NullEmpty() ?? string.Format(T("Media.Category.ImageAlternateTextFormat"), person.FullName),
+                    File = file
+                };
+
+                model.Add(item);
+            }
 
             if (model.Count == 0)
             {

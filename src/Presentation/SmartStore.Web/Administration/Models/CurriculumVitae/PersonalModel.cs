@@ -93,6 +93,7 @@ namespace SmartStore.Admin.Models.CurriculumVitae
         public DateTime? CreatedDate { get; set; }
 
         public DateTime? ModifiedDate { get; set; }
+        public bool ShowOnHomePage { get; set; }
 
         //Pictures.
         [SmartResourceDisplayName("Admin.Vitae.Personal.Fields.HasPreviewPicture")]

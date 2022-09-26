@@ -70,14 +70,14 @@ namespace SmartStore.Web.Infrastructure
             /* Common
 			----------------------------------------*/
 
-            //routes.MapLocalizedRoute("HomePage",
-            //    "",
-            //    new { controller = "Home", action = "Index" },
-            //    new[] { "SmartStore.Web.Controllers" });
             routes.MapLocalizedRoute("HomePage",
                 "",
-                new { controller = "Customer", action = "Login" },
+                new { controller = "Home", action = "Index" },
                 new[] { "SmartStore.Web.Controllers" });
+            //routes.MapLocalizedRoute("HomePage",
+            //    "",
+            //    new { controller = "Customer", action = "Login" },
+            //    new[] { "SmartStore.Web.Controllers" });
 
             routes.MapLocalizedRoute("Register",
                 "register/",

@@ -131,6 +131,7 @@ namespace SmartStore.Admin.Controllers
             model.TwitterLink = personal.TwitterLink;
             model.CreatedDate = personal.CreatedDate;
             model.ModifiedDate = personal.ModifiedDate;
+            model.ShowOnHomePage = personal.ShowOnHomePage;
             return model;
         }
 
@@ -210,6 +211,7 @@ namespace SmartStore.Admin.Controllers
                 model.TelegramLink = string.Empty;
                 model.InstagramLink = string.Empty;
                 model.TwitterLink = string.Empty;
+                model.ShowOnHomePage = true;
                 model.CreatedDate = null;
                 model.ModifiedDate = null;
             }
@@ -274,6 +276,8 @@ namespace SmartStore.Admin.Controllers
                 model.ModifiedDate = personal.ModifiedDate;
 
                 model.GridPageSize = _adminAreaSettings.GridPageSize;
+
+                model.ShowOnHomePage = personal.ShowOnHomePage;
             }
         }
 
@@ -362,6 +366,7 @@ namespace SmartStore.Admin.Controllers
             p.TelegramLink = m.TelegramLink;
             p.InstagramLink = m.InstagramLink;
             p.TwitterLink = m.TwitterLink;
+            p.ShowOnHomePage = m.ShowOnHomePage;
             p.CreatedDate = currentTime;
             p.ModifiedDate = currentTime;
         }

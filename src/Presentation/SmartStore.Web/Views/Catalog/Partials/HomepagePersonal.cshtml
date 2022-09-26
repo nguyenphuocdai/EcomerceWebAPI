@@ -1,0 +1,41 @@
+﻿@model IList<HomePagePersonalModel>
+
+@using SmartStore.Web.Models.Catalog;
+
+@{ 
+	if (Model.Count == 0)
+	{
+		return;
+	}
+}
+<div class="heading">
+    <h3 class="heading-title fs-h2">Contact</h3>
+</div>
+<div class="g-body fs-h5 font-weight-light">
+    <p>Everyone knows that a good beginning grabs attention. Grab the recruiter hook, line, and sinker with a fantastic resume introduction.<br></p>
+</div>
+
+<div class="artlist artlist-grid artlist-6-cols artlist-boxed artlist-homepage-categories">
+	@foreach (var item in Model)
+	{
+		var picture = item.PictureModel;
+		var linkTitle = item.PersonalModel.FullName;
+
+		<article class="art" data-id="@item.Id">
+			<div class="art-picture-block">
+				@if (picture != null && picture.ImageUrl.HasValue())
+				{
+					<a class="art-picture img-center-container" href="#" title="@linkTitle">
+						<img src="@picture.ImageUrl" alt="@picture.AlternateText" title="@picture.Title" loading="lazy" />
+					</a>
+				}
+			</div>
+            <div class="art-genericname">
+                <a href="#" title="@linkTitle">
+                    <span>@item.PersonalModel.FullName </span>
+                </a>
+                <span class="font-italic fs-xs">@item.PersonalModel.Title </span>
+            </div>
+		</article>
+	}
+</div>

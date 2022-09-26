@@ -251,7 +251,7 @@
                 @Html.CheckBoxFor(model => model.IsFreelanceAvailable)
                 @Html.ValidationMessageFor(model => model.IsFreelanceAvailable)
             </td>
-        </tr>
+            </tr>
         <tr>
             <td class="adminTitle">
                 @Html.SmartLabelFor(model => model.IsOpeningJob)
@@ -259,6 +259,14 @@
             <td class="adminData">
                 @Html.CheckBoxFor(model => model.IsOpeningJob)
                 @Html.ValidationMessageFor(model => model.IsOpeningJob)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.ShowOnHomePage)
+            </td>
+            <td class="adminData">
+                @Html.CheckBoxFor(model => model.ShowOnHomePage)
             </td>
         </tr>
         <tr class="adminSeparator">

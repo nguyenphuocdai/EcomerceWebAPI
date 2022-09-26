@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SmartStore.Core;
 using SmartStore.Core.Data;
 using SmartStore.Core.Domain.CurriculumVitae;
@@ -52,6 +53,17 @@ namespace SmartStore.Services.CurriculumVitae
                 return null;
 
             return _personalRepository.GetById(id);
+        }
+
+        public virtual IList<Personal> GetAllPersonalDisplayedOnHomePage()
+        {
+            var query = from c in _personalRepository.Table
+                orderby c.Id
+                where c.ShowOnHomePage
+                select c;
+
+            var personals = query.ToList();
+            return personals;
         }
 
         public virtual void UpdatePersonal(Personal personal)

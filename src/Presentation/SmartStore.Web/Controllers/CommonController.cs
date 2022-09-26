@@ -562,7 +562,8 @@ namespace SmartStore.Web.Controllers
                 IsCustomerImpersonated = Services.WorkContext.OriginalCustomerIfImpersonated != null,
                 DisplayAdminLink = Services.Permissions.Authorize(Permissions.System.AccessBackend),
                 ShoppingCartEnabled = Services.Permissions.Authorize(Permissions.Cart.AccessShoppingCart) && _shoppingCartSettings.MiniShoppingCartEnabled,
-                WishlistEnabled = Services.Permissions.Authorize(Permissions.Cart.AccessWishlist),
+                //WishlistEnabled = Services.Permissions.Authorize(Permissions.Cart.AccessWishlist),
+                WishlistEnabled = false,
                 CompareProductsEnabled = _catalogSettings.CompareProductsEnabled,
                 PublicStoreNavigationAllowed = Services.Permissions.Authorize(Permissions.System.AccessShop)
             };

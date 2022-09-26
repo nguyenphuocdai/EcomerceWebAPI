@@ -79,5 +79,7 @@ namespace SmartStore.Core.Domain.CurriculumVitae
         public DateTime? CreatedDate { get; set; }
         [DataMember]
         public DateTime? ModifiedDate { get; set; }
+        [DataMember]
+        public bool ShowOnHomePage { get; set; }
     }
 }

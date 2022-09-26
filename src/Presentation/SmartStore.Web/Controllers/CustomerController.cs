@@ -434,10 +434,10 @@ namespace SmartStore.Web.Controllers
             model.CheckoutAsGuest = checkoutAsGuest ?? false;
             model.DisplayCaptcha = _captchaSettings.CanDisplayCaptcha && _captchaSettings.ShowOnLoginPage;
 
-            if (Services.Permissions.Authorize(Permissions.System.AccessBackend))
-            {
-                return Redirect("/admin");
-            }
+            //if (Services.Permissions.Authorize(Permissions.System.AccessBackend))
+            //{
+            //    return Redirect("/admin");
+            //}
 
             return View(model);
         }

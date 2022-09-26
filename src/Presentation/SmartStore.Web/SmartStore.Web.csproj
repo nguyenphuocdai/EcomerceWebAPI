@@ -465,6 +465,7 @@
     <Compile Include="Models\ShoppingCart\EstimateShippingModel.cs" />
     <Compile Include="Models\ShoppingCart\ShoppingCartModel.cs" />
     <Compile Include="Models\Topics\TopicModel.cs" />
+    <Compile Include="Models\Vitae\HomePagePersonalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1941,6 +1942,7 @@
     <Content Include="Views\News\Partials\NewsSummaryHeading.cshtml" />
     <Content Include="Views\News\Partials\NewsSummaryList.cshtml" />
     <Content Include="Views\Common\Partials\MetaProperties.cshtml" />
+    <Content Include="Views\Catalog\Partials\HomepagePersonal.cshtml" />
     <None Include="Web.EFMigrations.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
