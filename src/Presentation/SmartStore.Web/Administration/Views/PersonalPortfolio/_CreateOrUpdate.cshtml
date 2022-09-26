@@ -59,6 +59,14 @@
                 @Html.SmartLabelFor(model => model.PortfolioName)
             </td>
             <td class="adminData">
+                @Html.TextBoxFor(model => model.PortfolioName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.PortfolioUrl)
+            </td>
+            <td class="adminData">
                 @Html.TextBoxFor(model => model.PortfolioUrl)
             </td>
         </tr>
@@ -115,7 +123,8 @@
                 @Html.SmartLabelFor(model => model.Tag)
             </td>
             <td class="adminData">
-                @Html.TextBoxFor(model => model.Tag)
+                @Html.ListBoxFor(model => model.Tag, Model.AvailableProductTags, new { multiple = "multiple", data_tags = "true" })
+                @Html.ValidationMessageFor(model => model.Tag)
             </td>
         </tr>
         <tr>

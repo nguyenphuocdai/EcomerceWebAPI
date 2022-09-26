@@ -1,24 +1,24 @@
-﻿@model SmartStore.Admin.Models.CurriculumVitae.PersonalResumeModel
+﻿@model SmartStore.Admin.Models.CurriculumVitae.PersonalPortfolioModel
 @using Telerik.Web.Mvc.UI;
 @using SmartStore.Core.Domain.Catalog;
 @{
-    ViewBag.Title = T("Admin.Catalog.Vitae.EditResume").Text;
+    ViewBag.Title = T("Admin.Catalog.Vitae.EditPortfolio").Text;
 }
 
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "personal-form" }))
 {
     <div class="section-header">
         <div class="title">
-            @T("Admin.Catalog.Vitae.EditResume") - <span title="@Model.Company">@Model.Company.Truncate(45, "...")</span>
-            <a href='@Url.Action("List")'>(@T("Admin.Vitae.Resume.BackToList"))</a>
+            @T("Admin.Catalog.Vitae.EditPortfolio") - <span title="@Model.PortfolioName">@Model.PortfolioName.Truncate(45, "...")</span>
+            <a href='@Url.Action("List")'>(@T("Admin.Vitae.Portfolio.BackToList"))</a>
         </div>
         <div class="options">
             @{ Html.RenderWidget("admin_button_toolbar_before"); }
-            <button type="submit" value="save" class="btn btn-warning entity-commit-trigger" data-commit-type="product" data-commit-action="update" data-commit-id="@Model.Id">
+            <button type="submit" value="save" class="btn btn-warning entity-commit-trigger" data-commit-type="portfolio" data-commit-action="update" data-commit-id="@Model.Id">
                 <i class="fa fa-check"></i>
                 <span>@T("Admin.Common.Save")</span>
             </button>
-            <button type="submit" value="save-continue" class="btn btn-secondary entity-commit-trigger" data-commit-type="product" data-commit-action="update" data-commit-id="@Model.Id">
+            <button type="submit" value="save-continue" class="btn btn-secondary entity-commit-trigger" data-commit-type="portfolio" data-commit-action="update" data-commit-id="@Model.Id">
                 @T("Admin.Common.SaveContinue")
             </button>
             <button type="submit" id="resume-delete" class="btn btn-danger">

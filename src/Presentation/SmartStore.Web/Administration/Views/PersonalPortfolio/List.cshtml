@@ -46,7 +46,7 @@
         </div>
         <div class="col-sm-6 col-lg-4 col-xl-3 form-group">
             <label>@T("Admin.Common.ApplyFilter")</label>
-            <button type="submit" id="search-resume" name="search-resume" class="btn btn-warning btn-block">
+            <button type="submit" id="search-portfolio" name="search-portfolio" class="btn btn-warning btn-block">
                 <span>@T("Admin.Common.ApplyFilter")</span>
             </button>
         </div>
@@ -64,17 +64,12 @@
             columns.Bound(x => x.Id);
             columns.Bound(x => x.CustomerId);
             columns.Bound(x => x.PortfolioName);
-            columns.Bound(x => x.PortfolioUrl);
-            columns.Bound(x => x.ShortMessage);
             columns.Bound(x => x.From);
             columns.Bound(x => x.To);
             columns.Bound(x => x.Published);
             columns.Bound(x => x.Status);
             columns.Bound(x => x.Description);
             columns.Bound(x => x.Tag);
-            columns.Bound(x => x.ShareLinkFacebook);
-            columns.Bound(x => x.ShareLinkInstagram);
-            columns.Bound(x => x.ShareLinkTwitter);
             columns.Bound(x => x.CreatedDate);
             columns.Bound(x => x.ModifiedDate);
             columns.Bound(x => x.Id)
@@ -102,7 +97,7 @@
 
             $('#btnSearch').click(function () {
                 //search
-                var grid = $('#resume-grid').data('tGrid');
+                var grid = $('#portfolio-grid').data('tGrid');
                 grid.currentPage = 1; //new search. Set page size to 1
                 grid.ajaxRequest();
                 //clear selected checkboxes
@@ -112,7 +107,7 @@
             });
 
             $('#delete-selected').click(function (e) {
-                processMany(e, "@Url.Action("DeleteSelected", "PersonalResume")")
+                processMany(e, "@Url.Action("DeleteSelected", "PersonalPortfolio")")
             });
 
             function processMany(e, action) {
@@ -128,7 +123,7 @@
                     },
                     complete: function (data) {
                         //reload grid
-                        var grid = $('#resume-grid').data('tGrid');
+                        var grid = $('#portfolio-grid').data('tGrid');
                         grid.ajaxRequest();
                         //clear selected checkboxes
                         $('.checkboxGroups').attr('checked', false).change();
@@ -144,7 +139,7 @@
 
 			$(".form-control.sf").on("keydown", function (e) {
 				if (e.keyCode == 13) {
-					$("#search-resume").click();
+					$("#search-portfolio").click();
 					return false;
 				}
 			});
@@ -154,7 +149,7 @@
 			});
 
 			// Wire up checkboxes.
-            $(document).on('change', '#resume-grid input[type=checkbox][id!=mastercheckbox]', function (e) {
+            $(document).on('change', '#portfolio-grid input[type=checkbox][id!=mastercheckbox]', function (e) {
 				var $check = $(this);
 				if ($check.is(":checked") == true) {
 					var checked = jQuery.inArray($check.val(), selectedIds);
@@ -177,7 +172,7 @@
 		});
 
 		function onDataBound() {
-			$('#resume-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
+			$('#portfolio-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
 				var currentId = $(this).val();
 				var checked = jQuery.inArray(currentId, selectedIds);
 				// Set checked based on if current checkbox's value is in selectedIds.
@@ -188,8 +183,8 @@
         }
 
 		function updateMasterCheckbox() {
-            var numChkBoxes = $('#resume-grid input[type=checkbox][id!=mastercheckbox]').length;
-            var numChkBoxesChecked = $('#resume-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
+            var numChkBoxes = $('#portfolio-grid input[type=checkbox][id!=mastercheckbox]').length;
+            var numChkBoxesChecked = $('#portfolio-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
 			$('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
 		}
 
@@ -199,7 +194,7 @@
                 SearchName: $('#@Html.FieldIdFor(model => model.SearchName)').val()
 			};
 
-            var customerGrid = $('#resume-grid');
+            var customerGrid = $('#portfolio-grid');
 			if (customerGrid.data('init-loaded')) {
                 e.data.CustomerId = $('#@(Html.FieldIdFor(x => x.CustomerId))').val();
                 e.data.SearchName = $('#@(Html.FieldIdFor(x => x.SearchName))').val();
