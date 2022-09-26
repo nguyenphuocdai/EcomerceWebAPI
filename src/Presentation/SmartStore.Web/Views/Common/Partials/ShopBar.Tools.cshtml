@@ -14,7 +14,7 @@
 <div class="shopbar-col shopbar-tools" data-summary-href="@Url.Action("CartSummary", "ShoppingCart", new { cart = Model.ShoppingCartEnabled, wishlist = Model.WishlistEnabled, compare = Model.CompareProductsEnabled })">
 
 	<!-- Hamburger Menu -->
-	<div class="shopbar-tool d-lg-none" id="shopbar-menu">
+	@*<div class="shopbar-tool d-lg-none" id="shopbar-menu">
 		<a class="shopbar-button" href="#" data-toggle="offcanvas" data-autohide="true" data-placement="@(isRtl ? "right" : "left")" data-fullscreen="false" data-disablescrolling="true" data-target="#offcanvas-menu">
 			<span class="shopbar-button-icon">
 				<i class="icm icm-menu"></i>
@@ -23,7 +23,7 @@
 				@T("Common.Menu")
 			</span>
 		</a>
-	</div>
+	</div>*@
 
     @{ Html.RenderWidget("shopbar_tools_before"); }
 
