@@ -226,6 +226,24 @@
                 public const string Create = "curriculumvitae.personalportfolio.create";
                 public const string Delete = "curriculumvitae.personalportfolio.delete";
             }
+
+            public static class PersonalTag
+            {
+                public const string Self = "curriculumvitae.personaltag";
+                public const string Read = "curriculumvitae.personaltag.read";
+                public const string Update = "curriculumvitae.personaltag.update";
+                public const string Create = "curriculumvitae.personaltag.create";
+                public const string Delete = "curriculumvitae.personaltag.delete";
+            }
+
+            public static class PersonalCertificate
+            {
+                public const string Self = "curriculumvitae.personalcertificate";
+                public const string Read = "curriculumvitae.personalcertificate.read";
+                public const string Update = "curriculumvitae.personalcertificate.update";
+                public const string Create = "curriculumvitae.personalcertificate.create";
+                public const string Delete = "curriculumvitae.personalcertificate.delete";
+            }
         }
 
         public static class Cms
