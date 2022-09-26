@@ -1,0 +1,104 @@
+﻿@using SmartStore.Admin.Models.CurriculumVitae
+@using SmartStore.Core.Domain.Catalog;
+@using SmartStore.Web.Framework.UI;
+
+@model SmartStore.Admin.Models.CurriculumVitae.PersonalCertificateModel
+
+@{
+    Html.AddCssFileParts(true, "~/Content/vendors/x-editable/bootstrap-editable.css");
+    Html.AppendScriptParts(true, "~/Content/vendors/x-editable/bootstrap-editable.js");
+}
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.CustomerId)
+@Html.HiddenFor(model => model.Id)
+
+<div>
+    <table class="adminContent mb-2">
+        @if (Model.Id != 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SmartLabelFor(model => model.Id)
+                </td>
+                <td class="adminData">
+                    @Html.TextBoxFor(model => model.Id, new { @readonly = "readonly", @class = "form-control-plaintext" })
+                    @Html.ValidationMessageFor(model => model.Id)
+                </td>
+            </tr>
+            if (Model.CreatedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.CreatedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+            if (Model.ModifiedDate.HasValue)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SmartLabelFor(model => model.ModifiedDate)
+                    </td>
+                    <td class="adminData">
+                        <div class="form-control-plaintext">
+                            @Html.DisplayFor(model => model.ModifiedDate)
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.Name)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.Description)
+            </td>
+            <td class="adminData">
+                @Html.TextAreaFor(model => model.Description)
+            </td>
+        </tr>
+        
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.CertificateDate)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.CertificateDate)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.ImageId)
+            </td>
+            <td class="adminData wide" colspan="2">
+                @Html.EditorFor(model => model.ImageId, new
+                {
+                    entityId = Model.Id,
+                    entityType = "Certificate",
+                    transientUpload = false,
+                    album = "catalog",
+                    multifile = false,
+                    uploadedFiles = Model.MediaFile as IEnumerable<IMediaFile>,
+                    typeFilter = "image,video"
+                })
+                @Html.ValidationMessageFor(model => model.ImageId)
+            </td>
+        </tr>
+    </table>
+</div>
