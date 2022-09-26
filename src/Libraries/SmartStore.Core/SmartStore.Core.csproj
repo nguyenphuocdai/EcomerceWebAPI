@@ -229,6 +229,8 @@
     <Compile Include="Domain\Cms\MenuItemRecord.cs" />
     <Compile Include="Domain\Cms\WidgetSettings.cs" />
     <Compile Include="Domain\Common\PerformanceSettings.cs" />
+    <Compile Include="Domain\CurriculumVitae\PersonalCertificate.cs" />
+    <Compile Include="Domain\CurriculumVitae\PersonalTag.cs" />
     <Compile Include="Domain\CurriculumVitae\PersonalPortfolio.cs" />
     <Compile Include="Domain\CurriculumVitae\PersonalResume.cs" />
     <Compile Include="Domain\CurriculumVitae\PersonalSkill.cs" />

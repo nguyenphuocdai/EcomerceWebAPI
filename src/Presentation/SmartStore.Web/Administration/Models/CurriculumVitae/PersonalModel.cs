@@ -218,6 +218,31 @@ namespace SmartStore.Admin.Models.CurriculumVitae
         public bool NoThumb { get; set; }
     }
 
+    public class PersonalCertificateModel : EntityModelBase
+    {
+        public int CustomerId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        [UIHint("Media"), AdditionalMetadata("album", "catalog"), AdditionalMetadata("typeFilter", "image,video")]
+        [SmartResourceDisplayName("Admin.Catalog.Personal.Client.Fields.Picture")]
+        public int? ImageId { get; set; }
+        public DateTime? CertificateDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        [SmartResourceDisplayName("Admin.Catalog.Products.Fields.PictureThumbnailUrl")]
+        public string PictureThumbnailUrl { get; set; }
+        public ProductMediaFile MediaFile { get; set; }
+        public bool NoThumb { get; set; }
+    }
+
+    public class PersonalTagModel : EntityModelBase
+    {
+        public string Name { get; set; }
+        public bool Published { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+    }
+
     public class PersonalResumeModel : EntityModelBase
     {
         public int CustomerId { get; set; }
@@ -233,6 +258,7 @@ namespace SmartStore.Admin.Models.CurriculumVitae
         public DateTime? ModifiedDate { get; set; }
     }
 
+    [Validator(typeof(PortfolioValidator))]
     public class PersonalPortfolioModel : EntityModelBase
     {
         public int CustomerId { get; set; }
@@ -244,7 +270,8 @@ namespace SmartStore.Admin.Models.CurriculumVitae
         public DateTime? Published { get; set; }
         public int Status { get; set; }
         public string Description { get; set; }
-        public string Tag { get; set; }
+        public string[] Tag { get; set; }
+        public MultiSelectList AvailableProductTags { get; set; }
         public string ShareLinkFacebook { get; set; }
         public string ShareLinkTwitter { get; set; }
         public string ShareLinkInstagram { get; set; }
@@ -273,6 +300,14 @@ namespace SmartStore.Admin.Models.CurriculumVitae
             RuleFor(x => x.SkillName).NotEmpty().Length(1, 150);
             RuleFor(x => x.SkillPercentage).GreaterThanOrEqualTo(0);
             RuleFor(x => x.SkillStar).GreaterThanOrEqualTo(0).LessThan(6);
+        }
+    }
+
+    public partial class PortfolioValidator : AbstractValidator<PersonalPortfolioModel>
+    {
+        public PortfolioValidator(Localizer T)
+        {
+            RuleFor(x => x.PortfolioName).NotEmpty().Length(1, 250);
         }
     }
 }
