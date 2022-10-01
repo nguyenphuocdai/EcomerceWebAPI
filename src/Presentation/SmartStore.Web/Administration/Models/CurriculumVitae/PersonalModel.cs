@@ -149,7 +149,7 @@ namespace SmartStore.Admin.Models.CurriculumVitae
         [AllowHtml]
         public string AddChangelog { get; set; }
 
-
+        public int ExperienceYears { get; set; }
 
 
 
@@ -209,7 +209,7 @@ namespace SmartStore.Admin.Models.CurriculumVitae
 
         [UIHint("Media"), AdditionalMetadata("album", "catalog"), AdditionalMetadata("typeFilter", "image,video")]
         [SmartResourceDisplayName("Admin.Catalog.Personal.Client.Fields.Picture")]
-        public int? ClientImageId { get; set; }
+        public int ClientImageId { get; set; }
 
         public DateTime? CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }

@@ -5,6 +5,7 @@ namespace SmartStore.Core.Domain.Catalog
     {
         WorkSkills = 5,
         LanguageSkills = 10,
-        SoftSkills = 15
+        SoftSkills = 15,
+        ServiceSkills = 20
     }
 }

@@ -81,5 +81,7 @@ namespace SmartStore.Core.Domain.CurriculumVitae
         public DateTime? ModifiedDate { get; set; }
         [DataMember]
         public bool ShowOnHomePage { get; set; }
+        [DataMember]
+        public int ExperienceYears { get; set; }
     }
 }

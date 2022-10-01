@@ -95,7 +95,7 @@ namespace SmartStore.Admin.Controllers
             model.ModifiedDate = personalClient.ModifiedDate;
 
             // Media files.
-            var file = _mediaService.GetFileById(personalClient.ClientImageId ?? 0);
+            var file = _mediaService.GetFileById(personalClient.ClientImageId);
             model.PictureThumbnailUrl = _mediaService.GetUrl(file, _mediaSettings.CartThumbPictureSize);
             model.NoThumb = file == null;
             return model;

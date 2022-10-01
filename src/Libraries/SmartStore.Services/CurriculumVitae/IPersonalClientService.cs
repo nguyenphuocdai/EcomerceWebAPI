@@ -1,4 +1,5 @@
-﻿using SmartStore.Core;
+﻿using System.Collections.Generic;
+using SmartStore.Core;
 using SmartStore.Core.Domain.CurriculumVitae;
 
 namespace SmartStore.Services.CurriculumVitae
@@ -11,6 +12,7 @@ namespace SmartStore.Services.CurriculumVitae
         void UpdateClient(PersonalClient client);
         void DeleteClient(PersonalClient client);
         void DeleteClient(int id);
+        List<PersonalClient> GetClientByCustomerId(int id);
 
     }
 }

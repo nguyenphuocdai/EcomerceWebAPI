@@ -11,5 +11,8 @@ namespace SmartStore.Services.CurriculumVitae
         Personal GetPersonalById(int id);
         void UpdatePersonal(Personal personal);
         IList<Personal> GetAllPersonalDisplayedOnHomePage();
+
+        Personal GetPersonalByCustomerId(int id);
+        bool IsAllowInsert(int customerId);
     }
 }

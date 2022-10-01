@@ -132,6 +132,7 @@ namespace SmartStore.Admin.Controllers
             model.CreatedDate = personal.CreatedDate;
             model.ModifiedDate = personal.ModifiedDate;
             model.ShowOnHomePage = personal.ShowOnHomePage;
+            model.ExperienceYears = personal.ExperienceYears;
             return model;
         }
 
@@ -150,11 +151,19 @@ namespace SmartStore.Admin.Controllers
         [Permission(Permissions.CurriculumVitae.Personal.Create)]
         public ActionResult Create(PersonalModel model, bool continueEditing, FormCollection form)
         {
+            Customer currentCustomer = _services.WorkContext.CurrentCustomer;
+            if (_personalService.IsAllowInsert(currentCustomer.Id) == false)
+            {
+                PreparePersonalModel(model, null);
+                NotifyWarning(T("Admin.Catalog.Vitae.Exists"));
+                return View(model);
+            }
+
             if (ModelState.IsValid)
             {
                 Personal personal = new Personal();
                 MapModelToPersonal(model, personal, form, out _);
-
+                
                 _personalService.InsertPersonal(personal);
 
                 _customerActivityService.InsertActivity("AddNewPersonal", T("ActivityLog.AddNewPersonal"),
@@ -212,6 +221,7 @@ namespace SmartStore.Admin.Controllers
                 model.InstagramLink = string.Empty;
                 model.TwitterLink = string.Empty;
                 model.ShowOnHomePage = true;
+                model.ExperienceYears = 0;
                 model.CreatedDate = null;
                 model.ModifiedDate = null;
             }
@@ -274,6 +284,7 @@ namespace SmartStore.Admin.Controllers
                 model.TwitterLink = personal.TwitterLink;
                 model.CreatedDate = personal.CreatedDate;
                 model.ModifiedDate = personal.ModifiedDate;
+                model.ExperienceYears = personal.ExperienceYears;
 
                 model.GridPageSize = _adminAreaSettings.GridPageSize;
 
@@ -367,6 +378,7 @@ namespace SmartStore.Admin.Controllers
             p.InstagramLink = m.InstagramLink;
             p.TwitterLink = m.TwitterLink;
             p.ShowOnHomePage = m.ShowOnHomePage;
+            p.ExperienceYears = m.ExperienceYears;
             p.CreatedDate = currentTime;
             p.ModifiedDate = currentTime;
         }

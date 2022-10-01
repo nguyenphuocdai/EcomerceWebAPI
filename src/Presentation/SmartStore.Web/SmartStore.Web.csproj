@@ -466,6 +466,7 @@
     <Compile Include="Models\ShoppingCart\EstimateShippingModel.cs" />
     <Compile Include="Models\ShoppingCart\ShoppingCartModel.cs" />
     <Compile Include="Models\Topics\TopicModel.cs" />
+    <Compile Include="Models\Vitae\VitaeModel.cs" />
     <Compile Include="Models\Vitae\HomePagePersonalModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -2024,6 +2025,9 @@
     <Content Include="Views\Catalog\Partials\HomepagePersonal.cshtml" />
     <Content Include="Views\Vitae\Index.cshtml" />
     <Content Include="Views\Shared\Layouts\_DocumentVitae.cshtml" />
+    <Content Include="Views\Vitae\Resume.cshtml" />
+    <Content Include="Views\Vitae\Partials\MenuBar.cshtml" />
+    <Content Include="Views\Vitae\Partials\Footer.cshtml" />
     <None Include="Web.EFMigrations.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

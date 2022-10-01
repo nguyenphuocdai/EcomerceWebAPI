@@ -77,6 +77,14 @@
         </tr>
         <tr>
             <td class="adminTitle">
+                @Html.SmartLabelFor(model => model.ExperienceYears)
+            </td>
+            <td class="adminData">
+                @Html.TextBoxFor(model => model.ExperienceYears)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
                 @Html.SmartLabelFor(model => model.Residence)
             </td>
             <td class="adminData">

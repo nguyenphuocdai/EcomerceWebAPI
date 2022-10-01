@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SmartStore.Core;
 using SmartStore.Core.Data;
 using SmartStore.Core.Domain.CurriculumVitae;
@@ -49,6 +50,12 @@ namespace SmartStore.Services.CurriculumVitae
         {
             var client = (_personalClientRepository.Table).SingleOrDefault(x => x.Id == id);
             return client;
+        }
+
+        public virtual List<PersonalClient> GetClientByCustomerId(int id)
+        {
+            var clients = (_personalClientRepository.Table).Where(x => x.CustomerId == id).ToList();
+            return clients;
         }
 
         public virtual void UpdateClient(PersonalClient personalClient)

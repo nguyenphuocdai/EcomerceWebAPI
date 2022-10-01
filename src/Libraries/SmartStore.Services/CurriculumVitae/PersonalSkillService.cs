@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.ServiceModel.Configuration;
 using SmartStore.Core;
 using SmartStore.Core.Data;
@@ -70,7 +71,7 @@ namespace SmartStore.Services.CurriculumVitae
             return false;
         }
 
-        public virtual PersonalSkill GetPersonalSkillById(int id)
+        public virtual PersonalSkill GetSkillById(int id)
         {
             var skill = (_personalSkillRepository.Table).SingleOrDefault(x => x.Id == id);
             return skill;
@@ -92,9 +93,16 @@ namespace SmartStore.Services.CurriculumVitae
 
         public virtual void DeleteSkill(int id)
         {
-            var skill = GetPersonalSkillById(id);
+            var skill = GetSkillById(id);
             if (skill != null)
                 DeleteSkill(skill);
+        }
+
+        public virtual List<PersonalSkill> GetSkillByCustomerId(int id)
+        {
+            if (id == 0)
+                return null;
+            return (_personalSkillRepository.Table).Where(item => item.CustomerId == id).ToList();
         }
     }
 }

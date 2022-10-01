@@ -47,12 +47,30 @@ namespace SmartStore.Services.CurriculumVitae
             _personalRepository.Insert(personal);
         }
 
+        /// <summary>
+        /// Allow insert new personal each customer
+        /// </summary>
+        /// <param name="customerId">Customer ID</param>
+        /// <returns></returns>
+        public virtual bool IsAllowInsert(int customerId)
+        {
+            Personal person = GetPersonalByCustomerId(customerId);
+            return person != null;
+        }
+
         public virtual Personal GetPersonalById(int id)
         {
             if (id == 0)
                 return null;
 
             return _personalRepository.GetById(id);
+        }
+
+        public virtual Personal GetPersonalByCustomerId(int id)
+        {
+            if (id == 0)
+                return null;
+            return (_personalRepository.Table).SingleOrDefault(item => item.CustomerId == id);
         }
 
         public virtual IList<Personal> GetAllPersonalDisplayedOnHomePage()

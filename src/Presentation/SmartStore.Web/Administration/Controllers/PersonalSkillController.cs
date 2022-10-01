@@ -191,7 +191,7 @@ namespace SmartStore.Admin.Controllers
         [Permission(Permissions.CurriculumVitae.PersonalSkill.Read)]
         public ActionResult Edit(int id)
         {
-            var skill = _personalSkillService.GetPersonalSkillById(id);
+            var skill = _personalSkillService.GetSkillById(id);
             if (skill == null)
             {
                 NotifyWarning(T("Skill.NotFound", id));
@@ -210,7 +210,7 @@ namespace SmartStore.Admin.Controllers
         [Permission(Permissions.CurriculumVitae.PersonalSkill.Update)]
         public ActionResult Edit(PersonalSkillModel model, bool continueEditing)
         {
-            var skill = _personalSkillService.GetPersonalSkillById(model.Id);
+            var skill = _personalSkillService.GetSkillById(model.Id);
             if (skill == null)
             {
                 NotifyWarning(T("Skill.NotFound", model.Id));
@@ -245,7 +245,7 @@ namespace SmartStore.Admin.Controllers
         [Permission(Permissions.CurriculumVitae.PersonalSkill.Delete)]
         public ActionResult Delete(int id)
         {
-            var skill = _personalSkillService.GetPersonalSkillById(id);
+            var skill = _personalSkillService.GetSkillById(id);
             _personalSkillService.DeleteSkill(skill);
 
             _customerActivityService.InsertActivity("DeleteProduct", T("ActivityLog.DeleteSkill"), skill.SkillName);

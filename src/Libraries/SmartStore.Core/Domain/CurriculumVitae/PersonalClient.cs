@@ -13,7 +13,7 @@ namespace SmartStore.Core.Domain.CurriculumVitae
         [DataMember]
         public string ClientDescription { get; set; }
         [DataMember]
-        public int? ClientImageId { get; set; }
+        public int ClientImageId { get; set; }
         [DataMember]
         public DateTime? CreatedDate { get; set; }
         [DataMember]
